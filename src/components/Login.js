@@ -6,7 +6,7 @@ import logo from '../assets/Share-Pics-logos_white.png';
 
 import { client } from '../client';
 
-export const Login = () => {
+const Login = () => {
   const navigate = useNavigate();
 
   const responseGoogle = (res) => {
@@ -71,3 +71,5 @@ export const Login = () => {
     </div>
   );
 };
+
+export default Login;
