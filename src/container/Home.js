@@ -12,7 +12,7 @@ import Pins from './Pins';
 
 const Home = () => {
   const [toggleSidebar, setToggleSidebar] = useState(false);
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState();
   const scrollRef = useRef(null);
   //* this will fetch the data of user from localStorage (Login file) ---
   const userInfo =

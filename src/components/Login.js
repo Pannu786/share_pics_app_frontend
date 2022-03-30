@@ -13,7 +13,7 @@ const Login = () => {
     //*it is storing the data in localStorage which we are getting it from onSuccess googleId method ---
     localStorage.setItem('userInfo', JSON.stringify(res.profileObj));
     const { name, googleId, imageUrl } = res.profileObj;
-     console.log(res);
+
     //*this doc will be used to store the user info in the database(backend) ---
     const doc = {
       _id: googleId,
