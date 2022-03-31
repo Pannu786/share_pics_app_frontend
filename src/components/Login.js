@@ -1,7 +1,7 @@
 import GoogleLogin from 'react-google-login';
 import { useNavigate } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
-import sharevideo from '../assets/share.mp4';
+import shareVideo from '../assets/share.mp4';
 import logo from '../assets/Share-Pics-logos_white.png';
 
 import { client } from '../client';
@@ -9,10 +9,11 @@ import { client } from '../client';
 const Login = () => {
   const navigate = useNavigate();
 
-  const responseGoogle = (res) => {
-    //*it is storing the data in localStorage which we are getting it from onSuccess googleId method ---
-    localStorage.setItem('userInfo', JSON.stringify(res.profileObj));
-    const { name, googleId, imageUrl } = res.profileObj;
+  const responseGoogle = (response) => {
+    //*it is storing the data in localStorage which we are getting it from onSuccess googleId method (whenever new user logs-in) ---
+    console.log(response)
+    localStorage.setItem('user', JSON.stringify(response.profileObj));
+    const { name, googleId, imageUrl } = response.profileObj;
 
     //*this doc will be used to store the user info in the database(backend) ---
     const doc = {
@@ -23,13 +24,11 @@ const Login = () => {
     };
 
     //* this will create a new document if it is not exist in const "doc"  ---
-    client
-      .createIfNotExists(doc)
-      //* if the document is created successfully then it will navigate to the home page ---
-      .then(() => {
-        //* using useNavigate hook here to navigate it to the home page ---
-        navigate('/', { replace: true });
-      });
+    //* if the document is created successfully (.then) it will navigate to the home page ---
+    //* using useNavigate hook here to navigate it to the home page ---
+    client.createIfNotExists(doc).then(() => {
+      navigate('/', { replace: true });
+    });
   };
 
   return (
@@ -37,7 +36,7 @@ const Login = () => {
       <div className='relative w-full h-full'>
         <video
           className='w-full h-full object-cover'
-          src={sharevideo}
+          src={shareVideo}
           type='video/mp4'
           loop
           controls={false}
