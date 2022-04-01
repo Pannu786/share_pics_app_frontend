@@ -5,7 +5,7 @@ import { HiMenu } from 'react-icons/hi';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import logo from '../assets/Share-Pics-logos_black.png';
 
-import userQuery from '../utils/data';
+import { userQuery } from '../utils/data';
 import { Sidebar, UserProfile } from '../components';
 import { client } from '../client';
 import Pins from './Pins';
@@ -22,7 +22,7 @@ const Home = () => {
 
   useEffect(() => {
     const query = userQuery(userInfo?.googleId);
-    
+
     client.fetch(query).then((data) => {
       setUser(data[0]);
     });
@@ -53,19 +53,18 @@ const Home = () => {
             <img src={user?.image} width='145px' alt='logo' />
           </Link>
         </div>
-      {toggleSidebar && (
-        <div className='fixed w-4/5 bg-white h-screen overflow-y-auto shadow-md z-10 animate-slide-in'>
-          <div className='absolute w-full flex justify-end item-center p-2'>
-            <AiFillCloseCircle
-              fontSize={30}
-              className='cursor-pointer'
-              onClick={() => setToggleSidebar(false)}
-            />
+        {toggleSidebar && (
+          <div className='fixed w-4/5 bg-white h-screen overflow-y-auto shadow-md z-10 animate-slide-in'>
+            <div className='absolute w-full flex justify-end item-center p-2'>
+              <AiFillCloseCircle
+                fontSize={30}
+                className='cursor-pointer'
+                onClick={() => setToggleSidebar(false)}
+              />
+            </div>
+            <Sidebar user={user && user} closeToggle={setToggleSidebar} />
           </div>
-          <Sidebar user={user && user} closeToggle={setToggleSidebar} />
-        </div>
         )}
-        
       </div>
       <div className='pb-2 flex-1 h-screen overflow-y-scroll' ref={scrollRef}>
         <Routes>
