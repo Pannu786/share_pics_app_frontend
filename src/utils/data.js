@@ -6,7 +6,6 @@ export const userQuery = (userId) => {
   return query;
 };
 
-
 //* this will fetch which URL is the user is currently on and then will return the data defined in the query ---
 export const searchQuery = (searchTerm) => {
   const query = `*[_type == 'pin' && title match '${searchTerm}*' || category match '${searchTerm}*' || about match '${searchTerm}*' ]{
@@ -34,3 +33,27 @@ export const searchQuery = (searchTerm) => {
   }`;
   return query;
 };
+
+export const feedQuery = `*[_type == 'pin'] | order(_createAt desc) {
+  image{
+      asset -> {
+        url
+      }
+    },
+    _id,
+    destination,
+    postedBy -> {
+      _id,
+      userName,
+      image
+    },
+    save[] {
+      _key,
+      postedBy -> { 
+        _id,
+        userName,
+        image
+      },
+    },
+
+}`;
