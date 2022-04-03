@@ -9,16 +9,14 @@ import { userQuery } from '../utils/data';
 import { Sidebar, UserProfile } from '../components';
 import { client } from '../client';
 import Pins from './Pins';
+import { fetchUser } from '../utils/fetchUser';
 
 const Home = () => {
   const [toggleSidebar, setToggleSidebar] = useState(false);
   const [user, setUser] = useState();
   const scrollRef = useRef(null);
   //* this will fetch the data of user from localStorage (Login file) ---
-  const userInfo =
-    localStorage.getItem('user') !== 'undefined'
-      ? JSON.parse(localStorage.getItem('user'))
-      : localStorage.clear();
+  const userInfo = fetchUser();
 
   useEffect(() => {
     const query = userQuery(userInfo?.googleId);
