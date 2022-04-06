@@ -159,7 +159,7 @@ const PinDetail = ({ user }) => {
           </div>
         </div>
       </div>
-      {pins.length > 0 ? (
+      {pins?.length > 0 ? (
         <>
           <h2 className='text-center font-bold text-2x mt-8 mb-4'>
             More like this
