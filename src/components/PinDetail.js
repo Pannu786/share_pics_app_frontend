@@ -16,9 +16,6 @@ const PinDetail = ({ user }) => {
 
   const { pinId } = useParams();
 
-  if (!pinDetail) return <Spinner message='Loading pin details...' />;
-
-
   //* fetching Pin details from the server (Sanity Backend)
   const fetchPinDetails = () => {
     let query = pinDetailQuery(pinId);
@@ -36,6 +33,12 @@ const PinDetail = ({ user }) => {
     }
   };
 
+  useEffect(() => {
+    fetchPinDetails();
+  }, [pinId]);
+
+  if (!pinDetail) return <Spinner message='Loading pin details...' />;
+  
   return <div>PinDetail</div>;
 };
 
